@@ -5,6 +5,11 @@ import requests
 from requests.cookies import RequestsCookieJar
 from requests.utils import dict_from_cookiejar, cookiejar_from_dict
 
+def push_msg(skey: str, title: str, content: str):
+    params = {"title": title, "desp": content}
+    push_url = "https://sctapi.ftqq.com/" + skey +".send"
+    requests.get(push_url, params=params)
+
 if __name__ == '__main__':
 
     parser = argparse.ArgumentParser(description="CordCloud Checkin")
@@ -52,7 +57,16 @@ if __name__ == '__main__':
             "Referer": f"{url}/user"
         },timeout=10)
 
-        print(response.json())
+        result = response.json()
+        print(result)
+        push_title = "Cord签到:" + result["msg"]    
+        if result["ret"] == 1 and "trafficInfo" in result:
+            un_used = result["trafficInfo"]["unUsedTraffic"] if "unUsedTraffic" in result["trafficInfo"] else "无效key"
+            push_title += "剩: " + un_used
+            push_content = "剩余流量: " + un_used
+        else:
+            push_content = "签到过了."
+        push_msg(skey, push_title, push_content)
     
     except Exception as e:
         print(e)
