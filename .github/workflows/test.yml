@@ -52,9 +52,10 @@ jobs:
         USERNAME: ${{secrets.USERNAME}}
         PASSWORD: ${{secrets.PASSWORD}}
         URL: ${{secrets.URL}}
+        SKEY: ${{secrets.SKEY}}
       run: |
         export DISPLAY=:99
         sudo Xvfb -ac :99 -screen 0 1280x1024x24 > /dev/null 2>&1 &
         jobs -l
-        python AutoCheckin.py --username=$USERNAME --password=$PASSWORD --url=$URL
+        python AutoCheckin.py --username=$USERNAME --password=$PASSWORD --url=$URL --skey=$SKEY
 
