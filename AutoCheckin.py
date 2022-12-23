@@ -16,11 +16,13 @@ if __name__ == '__main__':
     parser.add_argument("-u", "--username", help="username", type=str,required=True)
     parser.add_argument("-p", "--password", help="password", type=str,required=True)
     parser.add_argument("-U","--url",help="cordcloud url",type=str,required=True)
+    parser.add_argument("-s","--skey",help="skey",type=str,required=True)
     args=parser.parse_args()
 
     username = args.username
     password = args.password
     url = args.url
+    skey = args.skey
 
     options = uc.ChromeOptions()
     options.add_argument("--window-size=1280,1024")
