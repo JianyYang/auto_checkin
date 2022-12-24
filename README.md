@@ -21,7 +21,6 @@ And set the `USERNAME` , `PASSWORD` and `URL` in the Github Actions secrets  whi
 I configured ServerChan (https://sct.ftqq.com/), so this repo needs to add `SKEY` secret.  
 Github Action secret setting path: `Settings->Secrets->Actions->New repository secret`.  
 
-`Settings->Secrets->Actions->New repository secret`.  
 This is an example for setting up the cron:
 ```yaml
 on:
