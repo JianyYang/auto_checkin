@@ -38,9 +38,8 @@ if __name__ == '__main__':
 
         driver.get(f'{url}/auth/login')
         
-        time.sleep(30)
-        print("-=-")
-        pagetitle = driver.find_element('tag name', 'title').text
+        time.sleep(20)
+        pagetitle = driver.find_element(By.XPATH, "/html/head/title").text
         print(pagetitle)
         print("===")
         
