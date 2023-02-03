@@ -31,10 +31,12 @@ if __name__ == '__main__':
     options.add_argument("--excludeSwitches=enable-automation")
     options.add_argument("--disable-blink-features=AutomationControlled")
     driver = uc.Chrome(driver_executable_path="/usr/bin/chromedriver",options=options)
-    driver.implicitly_wait(60)
+    driver.implicitly_wait(10)
     try:
 
         driver.get(f'{url}/auth/login')
+        
+        driver.implicitly_wait(30)
 
         email_input = driver.find_element(by=By.ID, value="email")
         email_input.send_keys(username)
