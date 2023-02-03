@@ -34,11 +34,15 @@ if __name__ == '__main__':
     options.add_argument("--disable-blink-features=AutomationControlled")
     driver = uc.Chrome(driver_executable_path="/usr/bin/chromedriver",options=options)
     driver.implicitly_wait(10)
-    try:
-
+    try:        
         driver.get(f'{url}/auth/login')
         
         time.sleep(20)
+        list_windows = driver.window_handles
+        print(list_windows)
+        print(list_windows[0])
+        driver.switch_to.window(list_windows[0])
+        
         pagetitle = driver.find_element(By.XPATH, "/html/head/title").text
         print(pagetitle)
         print("===")
