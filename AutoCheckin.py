@@ -39,9 +39,11 @@ if __name__ == '__main__':
         driver.get(f'{url}/auth/login')
         
         time.sleep(30)
+        print("-=-")
         pagetitle = driver.find_element('tag name', 'title').text
         print(pagetitle)
-
+        print("===")
+        
         email_input = driver.find_element(by=By.ID, value="email")
         email_input.send_keys(username)
         password_input = driver.find_element(by=By.ID, value="passwd")
