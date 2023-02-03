@@ -34,15 +34,28 @@ if __name__ == '__main__':
     options.add_argument("--disable-blink-features=AutomationControlled")
     driver = uc.Chrome(driver_executable_path="/usr/bin/chromedriver",options=options)
     driver.implicitly_wait(10)
-    try:        
+    try:
+
+        driver.execute_cdp_cmd("Network.setExtraHTTPHeaders", {"headers":{
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36",
+            }
+        })
+        
+        browser.execute_cdp_cmd("Page.addScriptToEvaluateOnNewDocument", {"source": """
+            Object.defineProperty(navigator, 'webdriver', {
+                get: () => False
+            })
+        """})
+        
         driver.get(f'{url}/auth/login')
         
-        time.sleep(20)
+        time.sleep(30)
         list_windows = driver.window_handles
         print(list_windows)
         driver.switch_to.window(list_windows[0])
         
-        print("===")
+        curwindowurl = browser.current_url
+        print(curwindowurl)
         
         email_input = driver.find_element(by=By.ID, value="email")
         email_input.send_keys(username)
