@@ -49,7 +49,7 @@ if __name__ == '__main__':
         
         driver.get(f'{url}/auth/login')
         
-        time.sleep(30)
+        time.sleep(50)
         list_windows = driver.window_handles
         print(list_windows)
         driver.switch_to.window(list_windows[0])
