@@ -40,7 +40,6 @@ if __name__ == '__main__':
         time.sleep(20)
         list_windows = driver.window_handles
         print(list_windows)
-        print(list_windows[0])
         driver.switch_to.window(list_windows[0])
         
         pagetitle = driver.find_element(By.XPATH, "/html/head/title").text
