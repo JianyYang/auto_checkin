@@ -42,8 +42,6 @@ if __name__ == '__main__':
         print(list_windows)
         driver.switch_to.window(list_windows[0])
         
-        pagetitle = driver.find_element(By.XPATH, "/html/head/title").text
-        print(pagetitle)
         print("===")
         
         email_input = driver.find_element(by=By.ID, value="email")
