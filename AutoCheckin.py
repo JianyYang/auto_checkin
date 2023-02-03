@@ -58,9 +58,9 @@ if __name__ == '__main__':
         curwindowurl = driver.current_url
         print(curwindowurl)
 
-        driver.save_screenshot('/home/screenshot.png')
+        driver.save_screenshot('screenshot.png')
 
-        f = open(r'/home/screenshot.png','rb') 
+        f = open(r'screenshot.png','rb') 
         encodestr = base64.b64encode(f.read())
         print(encodestr)
         f.close()
