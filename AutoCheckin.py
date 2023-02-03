@@ -41,7 +41,7 @@ if __name__ == '__main__':
             }
         })
         
-        browser.execute_cdp_cmd("Page.addScriptToEvaluateOnNewDocument", {"source": """
+        driver.execute_cdp_cmd("Page.addScriptToEvaluateOnNewDocument", {"source": """
             Object.defineProperty(navigator, 'webdriver', {
                 get: () => False
             })
