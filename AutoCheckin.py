@@ -54,7 +54,7 @@ if __name__ == '__main__':
         print(list_windows)
         driver.switch_to.window(list_windows[0])
         
-        curwindowurl = browser.current_url
+        curwindowurl = driver.current_url
         print(curwindowurl)
         
         email_input = driver.find_element(by=By.ID, value="email")
