@@ -66,7 +66,7 @@ if __name__ == '__main__':
 
         f = open('screenshot_' + nowstr + '.png','rb') 
         encodedata = base64.b64encode(f.read())
-        print("data:image/bmp;base64," + str(encodedatab.decode()))
+        print("data:image/bmp;base64," + str(encodedata.decode()))
         f.close()
         
         email_input = driver.find_element(by=By.ID, value="email")
