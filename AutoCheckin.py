@@ -39,6 +39,8 @@ if __name__ == '__main__':
     
     options.add_argument(f'--proxy-server={proxyurl}')
     
+    print(f'--proxy-server={proxyurl}')
+    
     driver = uc.Chrome(driver_executable_path="/usr/bin/chromedriver",options=options)
     driver.implicitly_wait(10)
     try:
