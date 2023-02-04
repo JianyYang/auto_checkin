@@ -21,12 +21,14 @@ if __name__ == '__main__':
     parser.add_argument("-p", "--password", help="password", type=str,required=True)
     parser.add_argument("-U","--url",help="cordcloud url",type=str,required=True)
     parser.add_argument("-s","--skey",help="skey",type=str,required=True)
+    parser.add_argument("-P","--proxyurl",help="proxyurl",type=str,required=True)
     args=parser.parse_args()
 
     username = args.username
     password = args.password
     url = args.url
     skey = args.skey
+    proxyurl = args.proxyurl
 
     options = uc.ChromeOptions()
     options.add_argument("--window-size=1280,1024")
@@ -34,6 +36,9 @@ if __name__ == '__main__':
     options.add_argument('--no-sandbox')
     options.add_argument("--excludeSwitches=enable-automation")
     options.add_argument("--disable-blink-features=AutomationControlled")
+    
+    options.add_argument(f'--proxy-server={proxyurl}')
+    
     driver = uc.Chrome(driver_executable_path="/usr/bin/chromedriver",options=options)
     driver.implicitly_wait(10)
     try:
