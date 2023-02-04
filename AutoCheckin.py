@@ -34,7 +34,7 @@ if __name__ == '__main__':
     print(proxyserver)
     
     testurl = "https://www.c-cloud.xyz/auth/login"
-    testproxies = {"http": proxyserver, "https": proxyserver}
+    proxies = {"http": proxyserver, "https": proxyserver}
     testresponse = requests.get(url, proxies=proxies, verify=False)
     print(testresponse.text)
 
