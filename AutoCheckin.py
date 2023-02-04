@@ -35,7 +35,7 @@ if __name__ == '__main__':
     
     testurl = "https://www.c-cloud.xyz/auth/login"
     proxies = {"http": proxyserver, "https": proxyserver}
-    testresponse = requests.get(url, proxies=proxies, verify=False)
+    testresponse = requests.get(testurl, proxies=proxies, verify=False)
     print(testresponse.text)
 
     options = uc.ChromeOptions()
