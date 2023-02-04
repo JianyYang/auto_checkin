@@ -30,7 +30,7 @@ if __name__ == '__main__':
     skey = args.skey
     proxykey = args.proxykey
 
-    proxyserver = 'http://fa82f17718a8576a773e9e24605649449559e3a9:antibot=true@proxy.zenrows.com:8001'
+    proxyserver = "http://" + proxykey + "@proxy.zenrows.com:8001"
     print(proxyserver)
 
     options = uc.ChromeOptions()
@@ -40,7 +40,7 @@ if __name__ == '__main__':
     options.add_argument("--excludeSwitches=enable-automation")
     options.add_argument("--disable-blink-features=AutomationControlled")
     
-    options.add_argument(f'--proxy-server={proxyserver}')
+    options.add_argument(f'--proxy-server=http://fa82f17718a8576a773e9e24605649449559e3a9:antibot=true@proxy.zenrows.com:8001')
     
     driver = uc.Chrome(driver_executable_path="/usr/bin/chromedriver",options=options)
     driver.implicitly_wait(10)
