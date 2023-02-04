@@ -59,8 +59,8 @@ if __name__ == '__main__':
         print(list_windows)
         driver.switch_to.window(list_windows[0])
         
-        curwindowurl = driver.current_url
-        print(curwindowurl)
+        print(driver.title)
+        print(driver.current_url)
 
         driver.save_screenshot('screenshot_' + nowstr + '.png')
 
