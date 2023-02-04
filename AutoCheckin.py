@@ -30,7 +30,7 @@ if __name__ == '__main__':
     skey = args.skey
     proxykey = args.proxykey
 
-    proxyserver = "http://" + proxykey + "&wait=5000@proxy.zenrows.com:8001"
+    proxyserver = "http://" + proxykey + "@proxy.zenrows.com:8001"
     print(proxyserver)
     
     testurl = "https://www.c-cloud.xyz/auth/login"
