@@ -7,6 +7,7 @@ from requests.utils import dict_from_cookiejar, cookiejar_from_dict
 import threading
 import time
 import base64
+from datetime import datetime
 
 def push_msg(skey: str, title: str, content: str):
     params = {"title": title, "desp": content}
@@ -36,6 +37,9 @@ if __name__ == '__main__':
     driver = uc.Chrome(driver_executable_path="/usr/bin/chromedriver",options=options)
     driver.implicitly_wait(10)
     try:
+        
+        now = datetime.now()
+        nowstr = str(now)
 
         driver.execute_cdp_cmd("Network.setExtraHTTPHeaders", {"headers":{
             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36",
@@ -50,7 +54,7 @@ if __name__ == '__main__':
         
         driver.get(f'{url}/auth/login')
         
-        time.sleep(50)
+        time.sleep(30)
         list_windows = driver.window_handles
         print(list_windows)
         driver.switch_to.window(list_windows[0])
@@ -58,11 +62,11 @@ if __name__ == '__main__':
         curwindowurl = driver.current_url
         print(curwindowurl)
 
-        driver.save_screenshot('screenshot.png')
+        driver.save_screenshot('screenshot_' + nowstr + '.png')
 
-        f = open(r'screenshot.png','rb') 
-        encodestr = base64.b64encode(f.read())
-        print(encodestr)
+        f = open('screenshot_' + nowstr + '.png','rb') 
+        encodedata = base64.b64encode(f.read())
+        print("data:image/bmp;base64," + encodedata)
         f.close()
         
         email_input = driver.find_element(by=By.ID, value="email")
