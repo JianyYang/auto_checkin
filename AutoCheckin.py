@@ -30,14 +30,6 @@ if __name__ == '__main__':
     skey = args.skey
     proxykey = args.proxykey
 
-    proxyserver = "http://" + proxykey + "@proxy.zenrows.com:8001"
-    print(proxyserver)
-    
-    testurl = "https://www.c-cloud.xyz/auth/login"
-    proxies = {"http": proxyserver, "https": proxyserver}
-    testresponse = requests.get(testurl, proxies=proxies, verify=False)
-    print(testresponse.text)
-
     options = uc.ChromeOptions()
     options.add_argument("--window-size=1280,1024")
     options.add_argument('--disable-gpu')
