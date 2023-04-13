@@ -4,6 +4,7 @@ import argparse
 import requests
 import subprocess
 import os
+import sys
 from requests.cookies import RequestsCookieJar
 from requests.utils import dict_from_cookiejar, cookiejar_from_dict
 import threading
