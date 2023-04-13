@@ -1,3 +1,3 @@
-requests~=2.27.1
-undetected-chromedriver==3.4.6
-selenium~=4.8.0
+requests
+undetected-chromedriver
+selenium
