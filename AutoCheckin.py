@@ -87,12 +87,17 @@ def start_checkin(username, password, url, skey, proxykey):
     driver = uc.Chrome(options=options,driver_executable_path = "./chromedriver/chromedriver")
     driver.implicitly_wait(10)
     
-    print(driver.title)
-    print(driver.current_url)
-    
     try:
 
         driver.get(f'{url}/auth/login')
+        
+        time.sleep(10)
+        list_windows = driver.window_handles
+        print(list_windows)
+        driver.switch_to.window(list_windows[0])
+        
+        print(driver.title)
+        print(driver.current_url)
 
         email_input = driver.find_element(by=By.ID, value="email")
         email_input.send_keys(username)
