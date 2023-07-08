@@ -76,9 +76,6 @@ def parse_arguments():
     parser.add_argument("-P","--proxykey",help="proxykey",type=str,required=True)
     return parser.parse_args()
 
-def document_initialised(driver):
-    return driver.execute_script("return initialised")
-
 def start_checkin(username, password, url, skey, proxykey):
     options = uc.ChromeOptions()
     options.add_argument("--window-size=1280,1024")
@@ -95,7 +92,7 @@ def start_checkin(username, password, url, skey, proxykey):
 
         driver.get(f'{url}/auth/login')
         
-        WebDriverWait(driver, timeout=15).until(document_initialised)
+        WebDriverWait(driver, timeout=15).until(lambda d: d.find_element(By.ID, "email"))
         list_windows = driver.window_handles
         print(list_windows)
         driver.switch_to.window(list_windows[0])
