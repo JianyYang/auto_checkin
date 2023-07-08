@@ -1,5 +1,6 @@
 import undetected_chromedriver as uc
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.wait import WebDriverWait
 import argparse
 import requests
 import subprocess
@@ -75,6 +76,9 @@ def parse_arguments():
     parser.add_argument("-P","--proxykey",help="proxykey",type=str,required=True)
     return parser.parse_args()
 
+def document_initialised(driver):
+    return driver.execute_script("return initialised")
+
 def start_checkin(username, password, url, skey, proxykey):
     options = uc.ChromeOptions()
     options.add_argument("--window-size=1280,1024")
@@ -91,7 +95,7 @@ def start_checkin(username, password, url, skey, proxykey):
 
         driver.get(f'{url}/auth/login')
         
-        time.sleep(10)
+        WebDriverWait(driver, timeout=15).until(document_initialised)
         list_windows = driver.window_handles
         print(list_windows)
         driver.switch_to.window(list_windows[0])
