@@ -36,6 +36,8 @@ class ChromeDriverDownloader:
 
     def _download(self, version):
         url = f"{self._base_url}/{version}/chromedriver_linux64.zip"
+        if version.startswith("115."):
+            url = f"https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/{version}/linux64/chromedriver-linux64.zip"
         print(f"downloading chrome driver from {url}")
         response = requests.get(url)
         file_name = "chromedriver.zip"
