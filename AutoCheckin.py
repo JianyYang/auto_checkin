@@ -25,16 +25,18 @@ class ChromeDriverDownloader:
 
     def _get_latest_version(self):
         main_version = '.'.join(self._version_str[:3])
-        if main_version.startswith("115."):
-            return self._version
+        #if main_version.startswith("115."):
+        #    return self._version
         response = requests.get(f"{self._base_url}/LATEST_RELEASE_{main_version}")
         return response.text
 
     def download_chromedriver(self):
         latest_version = self._get_latest_version()
+        if "Error" in latest_version:
+            latest_version = "114.0.5735.198"
         if latest_version == self._version:
             self._download(self._version)
-        elif int(self._version_str[3]) > int(latest_version.split('.')[3]):
+        elif int(self._version_str[0]) > int(latest_version.split('.')[0]) or int(self._version_str[3]) > int(latest_version.split('.')[3]):
             self._download(latest_version)
 
     def _download(self, version):
