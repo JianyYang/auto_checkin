@@ -21,9 +21,12 @@ class ChromeDriverDownloader:
         self._platform = platform
         self._chrome_driver_version_list = []
         self._base_url = "https://chromedriver.storage.googleapis.com"
+        self._base_test_url = "https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing"
 
     def _get_latest_version(self):
         main_version = '.'.join(self._version_str[:3])
+        if main_version.startswith("115."):
+            return main_version
         response = requests.get(f"{self._base_url}/LATEST_RELEASE_{main_version}")
         return response.text
 
@@ -40,7 +43,7 @@ class ChromeDriverDownloader:
         print(version.startswith('115.'))
         if version.startswith('115.'):
             print("coming...")
-            url = f"https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/{version}/linux64/chromedriver-linux64.zip"
+            url = f"{self._base_test_url}/{version}/{self._platform}/chromedriver-linux64.zip"
         print(f"downloading chrome driver from {url}")
         response = requests.get(url)
         file_name = "chromedriver.zip"
