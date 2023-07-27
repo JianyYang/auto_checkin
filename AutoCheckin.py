@@ -5,6 +5,7 @@ import argparse
 import requests
 import subprocess
 import os
+import shutil
 import sys
 from requests.cookies import RequestsCookieJar
 from requests.utils import dict_from_cookiejar, cookiejar_from_dict
@@ -51,6 +52,12 @@ class ChromeDriverDownloader:
         if os.path.exists(file_name):
             print("download chrome driver successfully.")
         os.system("unzip chromedriver.zip -d chromedriver")
+        try:
+            src_file = './chromedriver/chromedriver-linux64/chromedriver'
+            dst_file = './chromedriver/chromedriver'
+            shutil.move(src_file, dst_file)
+        except Exception as e:
+            print(e)
         os.remove(file_name)
 
 
