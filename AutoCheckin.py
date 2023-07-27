@@ -32,6 +32,8 @@ class ChromeDriverDownloader:
 
     def download_chromedriver(self):
         latest_version = self._get_latest_version()
+        print(latest_version)
+        print(self._version)
         if latest_version == self._version:
             self._download(self._version)
         elif int(self._version_str[3]) > int(latest_version.split('.')[3]):
