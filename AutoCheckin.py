@@ -13,6 +13,8 @@ import threading
 import time
 import base64
 from datetime import datetime
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
 
 class ChromeDriverDownloader:
     def __init__(self, version: str, platform: str):
@@ -99,7 +101,11 @@ def start_checkin(username, password, url, skey, proxykey):
     options.add_argument("--disable-blink-features=AutomationControlled")
     # options.add_argument(f'--proxy-server=http://fa82f17718a8576a773e9e24605649449559e3a9:antibot=true@proxy.zenrows.com:8001')
     
-    driver = uc.Chrome(options=options,driver_executable_path = "./chromedriver/chromedriver")
+    #driver = uc.Chrome(options=options,driver_executable_path = "./chromedriver/chromedriver")
+
+    service = Service(ChromeDriverManager(version="114.0.5735.90").install())
+    driver = uc.Chrome(options=options,driver_executable_path = service.path)
+    
     driver.implicitly_wait(10)
     
     try:
