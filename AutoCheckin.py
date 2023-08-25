@@ -103,7 +103,7 @@ def start_checkin(username, password, url, skey, proxykey):
     
     #driver = uc.Chrome(options=options,driver_executable_path = "./chromedriver/chromedriver")
 
-    service = Service(ChromeDriverManager(version="114.0.5735.90").install())
+    service = Service(ChromeDriverManager("114.0.5735.90").install())
     driver = uc.Chrome(options=options,driver_executable_path = service.path)
     
     driver.implicitly_wait(10)
