@@ -66,7 +66,7 @@ class ChromeDriverDownloader:
         # print(response.json())
         
         url = list(filter(lambda item: item["platform"] == "linux64", list(response.json()["channels"]["Stable"]["downloads"]["chromedriver"])))[0]["url"]
-        
+        print(f"downloading chrome driver from {url}")
         download_response = requests.get(url)
         file_name = "chromedriver.zip"
         with open(file_name, "wb") as f:
