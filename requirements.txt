@@ -1,4 +1,4 @@
 requests
-undetected-chromedriver==3.5.0
-selenium==4.10.0
+undetected-chromedriver
+selenium
 webdriver_manager
