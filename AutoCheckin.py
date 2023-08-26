@@ -34,13 +34,12 @@ class ChromeDriverDownloader:
         return response.text
 
     def download_chromedriver(self):
+        major_version = self._version_str[0]
+        print(f"major version is {major_version}")
+        if int(major_version) >= 115:
+            return self._download_testing()
         latest_version = self._get_latest_version()
-        if "Error" in latest_version:
-            latest_version = "114.0.5735.90"
-        if latest_version == self._version:
-            self._download(self._version)
-        elif int(self._version_str[0]) > int(latest_version.split('.')[0]) or int(self._version_str[3]) > int(latest_version.split('.')[3]):
-            self._download(latest_version)
+        return self._download(latest_version)
 
     def _download(self, version):
         url = f"{self._base_url}/{version}/chromedriver_linux64.zip"
@@ -51,6 +50,27 @@ class ChromeDriverDownloader:
         file_name = "chromedriver.zip"
         with open(file_name, "wb") as f:
             f.write(response.content)
+        if os.path.exists(file_name):
+            print("download chrome driver successfully.")
+        os.system("unzip chromedriver.zip -d chromedriver")
+        try:
+            src_file = './chromedriver/chromedriver-linux64/chromedriver'
+            dst_file = './chromedriver/chromedriver'
+            shutil.move(src_file, dst_file)
+        except Exception as e:
+            print(e)
+        os.remove(file_name)
+        
+    def _download_testing(self):
+        response = requests.get(f"https://googlechromelabs.github.io/chrome-for-testing/last-known-good-versions-with-downloads.json")        
+        # print(response.json())
+        
+        url = list(filter(lambda item: item["platform"] == "linux64", list(response.json()["channels"]["Stable"]["downloads"]["chromedriver"])))[0]["url"]
+        
+        download_response = requests.get(url)
+        file_name = "chromedriver.zip"
+        with open(file_name, "wb") as f:
+            f.write(download_response.content)
         if os.path.exists(file_name):
             print("download chrome driver successfully.")
         os.system("unzip chromedriver.zip -d chromedriver")
