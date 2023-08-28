@@ -165,12 +165,15 @@ def start_checkin(username, password, url, skey, proxykey):
 
         result = response.json()
         print(result)
-        push_title = "Cord签到:" + result["msg"]    
+            
         if result["ret"] == 1 and "trafficInfo" in result:
             un_used = result["trafficInfo"]["unUsedTraffic"] if "unUsedTraffic" in result["trafficInfo"] else "无效key"
-            push_title += "剩: " + un_used
-            push_content = "剩余流量: " + un_used
+            table = str.maketrans("", "", "获得了流量 ")
+            str_get = result["msg"].translate(table)
+            push_title = "得:" + str_get + "剩:" + un_used
+            push_content = "Cord签到.剩余流量: " + un_used
         else:
+            push_title = "Cord签到:" + result["msg"]
             push_content = "签到过了."
         push_msg(skey, push_title, push_content)
     
