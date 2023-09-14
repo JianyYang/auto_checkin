@@ -36,8 +36,8 @@ class ChromeDriverDownloader:
     def download_chromedriver(self):
         major_version = self._version_str[0]
         print(f"major version is {major_version}")
-        #if int(major_version) >= 115:
-        #    return self._download_testing()
+        if int(major_version) >= 115:
+            return self._download_testing()
         latest_version = self._get_latest_version()
         return self._download(latest_version)
 
@@ -66,6 +66,8 @@ class ChromeDriverDownloader:
         # print(response.json())
         
         url = list(filter(lambda item: item["platform"] == "linux64", list(response.json()["channels"]["Stable"]["downloads"]["chromedriver"])))[0]["url"]
+        if "116." not in url:
+            url = "https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/116.0.5845.96/linux64/chromedriver-linux64.zip"
         print(f"downloading chrome driver from {url}")
         download_response = requests.get(url)
         file_name = "chromedriver.zip"
