@@ -62,12 +62,12 @@ class ChromeDriverDownloader:
         os.remove(file_name)
         
     def _download_testing(self):
-        response = requests.get(f"https://googlechromelabs.github.io/chrome-for-testing/last-known-good-versions-with-downloads.json")        
+        response = requests.get(f"https://googlechromelabs.github.io/chrome-for-testing/latest-versions-per-milestone-with-downloads.json")        
         # print(response.json())
         
-        url = list(filter(lambda item: item["platform"] == "linux64", list(response.json()["channels"]["Stable"]["downloads"]["chromedriver"])))[0]["url"]
-        if "116." not in url:
-            url = "https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/116.0.5845.96/linux64/chromedriver-linux64.zip"
+        url = list(filter(lambda x: x["platform"]=="linux64",response.json()["milestones"][f"{self._version_str[0]}"]["downloads"]["chromedriver"]))[0]["url"]
+        # if "116." not in url:
+        #    url = "https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/116.0.5845.96/linux64/chromedriver-linux64.zip"
         print(f"downloading chrome driver from {url}")
         download_response = requests.get(url)
         file_name = "chromedriver.zip"
