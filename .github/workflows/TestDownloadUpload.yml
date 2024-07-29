@@ -1,8 +1,7 @@
 name: Scheduled File Download and Upload
 
 on:
-  schedule:
-    - cron: '0 0 * * *' # 每天的午夜运行一次（UTC时间）
+  workflow_dispatch:
 
 jobs:
   download-and-upload:
