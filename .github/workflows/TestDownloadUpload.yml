@@ -1,4 +1,4 @@
-name: Scheduled File Download and Upload
+name: Manual Test File Download and Upload
 
 on:
   workflow_dispatch:
