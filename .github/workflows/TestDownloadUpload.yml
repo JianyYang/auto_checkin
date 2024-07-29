@@ -1,0 +1,24 @@
+name: Scheduled File Download and Upload
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # 每天的午夜运行一次（UTC时间）
+
+jobs:
+  download-and-upload:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Download file
+      run: |
+        curl -o file-to-upload.txt https://raw.githubusercontent.com/hujingguang/ChinaIPTV/main/cnTV_AutoUpdate.m3u8
+
+    - name: Upload file via API
+      env:
+        API_URL: ${{ secrets.UPLOAD_API_URL }}
+      run: |
+        curl -X POST $API_URL \
+          -F "file=@file-to-upload.txt"
