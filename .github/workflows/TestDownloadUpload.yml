@@ -21,3 +21,6 @@ jobs:
       run: |
         curl -X POST $API_URL \
           -F "file=@tv.m3u"
+    - name: Clean Up
+      run: |
+        rm tv.m3u
